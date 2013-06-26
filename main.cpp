@@ -11,7 +11,7 @@
 using namespace std;
 using namespace cv;
 
-void main( ){
+void main(){
 
 	//*** directory
 	string directory = "D:\\work\\Projects\\Dataset";

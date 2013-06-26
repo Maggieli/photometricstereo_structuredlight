@@ -6,44 +6,40 @@
 #include<vector>
 #include<iostream>
 #include< string>
-using namespace cv;
-using namespace std;
-
 
 
 #define MASK_BG 0
 
-class ImageGroup{
+class PhotometricStereo{
+	friend class geometry;
 public:
-	ImageGroup()
+	PhotometricStereo()
 	{
 	}
-
-	ImageGroup(string dataset, string imagesname);
-
-	~ImageGroup()
+	~PhotometricStereo()
 	{
 	}
-
+	void RemoveNoise();
+	void RemoveHighlight();
+	void Removeshadow();
+	//void MakeMask();
+	Mat& CalculateLightDirection();
+	Mat& CalculateNormals();
+    Mat& CalculateGradients(float min_angle_rad = 0.001f);
+    //int CalculateDepths();
+private:
+	std::string imagesname_;
 	int width_;
 	int height_;
-	Mat maskimage_;
-	string imagesname_;
 	int numlights_;
-	Mat lights_;
-	vector<Mat>colorimagesmat_;
-	vector<Mat>grayimagesmat_;
-
-
-	void remove_noise();
-	
-	
+	cv::Mat maskimage_;	
+	cv::Mat lights_;
+	//cv::Mat normal_;
+	//cv::Mat gradient_;
+	vector<cv::Mat>colorimagesmat_;
+	vector<cv::Mat>grayimagesmat_;	
 
 };
-
-int CalculateNormals(const ImageGroup& ig, Mat& normals);
-int CalculateGradients(const ImageGroup& ig, const Mat& normals, Mat& gradients, float min_angle_rad = 0.001f);
-int CalculateDepths(const ImageGroup& ig, const Mat& gradients, Mat& surface);
 
 
 #endif
