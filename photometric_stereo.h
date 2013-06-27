@@ -27,7 +27,7 @@ public:
 	bool CalculateNormals( );
     bool CalculateGradients(float min_angle_rad = 0.001f);
 	bool CalculateDepth();
-    //bool SaveDepths();
+    void SaveDepths();
 		void SetWidth(int width)
 	{
 		width_ = width;

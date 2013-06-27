@@ -215,16 +215,8 @@ bool PhotometricStereo::CalculateDepth()
 	maxErr = 1e-4;
 	int maxCount = 5000;
 
-	ofstream file3;
-	file3.open("err.txt");
-   /* for (i = 0; i < height_ ; i++)
-      {
-		   for (j = width_ -1; j >= 0; j--)
-	           {
-				   file3<< depth_.at<float>(i,j)<<" ";
-		   }
-	}*/
-
+	//ofstream file3;
+	//file3.open("err.txt");
 	for(int k = 0; k < maxCount; k++)
 	{
 		double err = 0.0;
@@ -255,18 +247,20 @@ bool PhotometricStereo::CalculateDepth()
 		       }
       
        }
-		        file3 << err<<" ";
+		        //file3 << err<<" ";
 		        if (abs (err) < maxErr)
 	           {
 			        cout<<"The interation is accomplished in"<<k<<"times"<<endl;
-			        return 1;
+			        return true;
 			        break;
 			   }      
 	} 
-	file3.close();
-
-
-	/*ofstream file;
+	//file3.close();
+}
+void PhotometricStereo::SaveDepths()
+{
+	
+	ofstream file;
 	file.open(( imagesname_ + "sorr.ply" ).c_str());
 	file << "ply" << endl;
 	file << "format ascii 1.0" << endl;
@@ -291,6 +285,5 @@ bool PhotometricStereo::CalculateDepth()
 				<< colorimagesmat_[0].at<Vec3f>(i, j)[0]<<endl;
 	   }
    }
-  file.close();*/
-  return true;
+  file.close();
 }

@@ -25,16 +25,12 @@ void main(){
 
 
 	PhotometricStereo stereo_image(directory, filename);
-	//stereo_image.remove_noise();
+	stereo_image.RemoveNoise();
 
 
 	int width, height;
 	width = stereo_image.GetWidth();
 	height = stereo_image.GetHeight();
-
-	//Mat surfacenormal(height, width, CV_32FC3, Scalar::all(0.0));
-	//Mat gradient(height, width, CV_32FC3, Scalar::all(0.0));
-	//Mat depth (height, width, CV_32FC1, Scalar::all(0.0) );
 
 	if(stereo_image.CalculateNormals() )
 	{
@@ -48,6 +44,7 @@ void main(){
 	{
 		cout<<"Compute depth successfully!"<<endl;
 	}
+	stereo_image.SaveDepths();
 }
 
 
