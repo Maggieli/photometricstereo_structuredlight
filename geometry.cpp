@@ -1,4 +1,4 @@
-#include <opencv2/imgproc/imgproc.hpp>
+/*#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/core/core.hpp>
 #include <iostream>
@@ -70,7 +70,7 @@ void read_pointdata( string &directory, string& filename, Mat& low_geometry, int
 		   }while(getline(in, line));
        }   
    }
-}
+}*/
 
 
 

@@ -7,8 +7,7 @@
 #include<iostream>
 #include< string>
 
-
-#define MASK_BG 0
+using namespace cv;
 
 class PhotometricStereo{
 	friend class geometry;
@@ -16,6 +15,7 @@ public:
 	PhotometricStereo()
 	{
 	}
+	PhotometricStereo(std::string dataset, std::string imagename);
 	~PhotometricStereo()
 	{
 	}
@@ -23,21 +23,43 @@ public:
 	void RemoveHighlight();
 	void Removeshadow();
 	//void MakeMask();
-	Mat& CalculateLightDirection();
-	Mat& CalculateNormals();
-    Mat& CalculateGradients(float min_angle_rad = 0.001f);
-    //int CalculateDepths();
+	//Mat& CalculateLightDirection();
+	bool CalculateNormals( );
+    bool CalculateGradients(float min_angle_rad = 0.001f);
+	bool CalculateDepth();
+    //bool SaveDepths();
+		void SetWidth(int width)
+	{
+		width_ = width;
+	}
+	int GetWidth()
+	{
+		return width_;
+	}
+	void SetHeight(int height)
+	{
+		height_ = height;
+	}
+	int GetHeight()
+	{
+		return height_;
+	}
+	int GetNumlights()
+	{
+		return numlights_;
+	}
 private:
 	std::string imagesname_;
 	int width_;
 	int height_;
 	int numlights_;
 	cv::Mat maskimage_;	
-	cv::Mat lights_;
-	//cv::Mat normal_;
-	//cv::Mat gradient_;
-	vector<cv::Mat>colorimagesmat_;
-	vector<cv::Mat>grayimagesmat_;	
+	Mat lights_;
+	Mat normal_;
+	Mat gradient_;
+	Mat depth_;
+	vector<Mat> colorimagesmat_;
+	vector<Mat> grayimagesmat_;	
 
 };
 

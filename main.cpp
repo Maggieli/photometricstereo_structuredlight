@@ -24,57 +24,30 @@ void main(){
 	cin.clear();
 
 
-	ImageGroup stereo_image(directory, filename);
-	stereo_image.remove_noise();
+	PhotometricStereo stereo_image(directory, filename);
+	//stereo_image.remove_noise();
 
 
 	int width, height;
-	width = stereo_image.width_;
-	height = stereo_image.height_;
+	width = stereo_image.GetWidth();
+	height = stereo_image.GetHeight();
 
-	Mat surfacenormal(height, width, CV_32FC3, Scalar::all(0.0));
-	Mat gradient(height, width, CV_32FC3, Scalar::all(0.0));
-	Mat depth (height, width, CV_32FC1, Scalar::all(0.0) );
+	//Mat surfacenormal(height, width, CV_32FC3, Scalar::all(0.0));
+	//Mat gradient(height, width, CV_32FC3, Scalar::all(0.0));
+	//Mat depth (height, width, CV_32FC1, Scalar::all(0.0) );
 
-	if(CalculateNormals(stereo_image, surfacenormal) )
+	if(stereo_image.CalculateNormals() )
 	{
 		cout<<"Compute normals successfully!"<<endl;
 	}
-	if(CalculateGradients(stereo_image, surfacenormal, gradient) )
+	if(stereo_image.CalculateGradients() )
 	{
 		cout<<"Compute gradient successfully!"<<endl;
 	}
-	if(CalculateDepths(stereo_image, gradient, depth) )
+	if(stereo_image.CalculateDepth() )
 	{
 		cout<<"Compute depth successfully!"<<endl;
 	}
-	ofstream file;
-	file.open( ( filename + "sorr.ply" ).c_str() );
-	file << "ply" << endl;
-	file << "format ascii 1.0" << endl;
-	file << "comment made by Min" << endl;
-	file << "comment this file is a "<< endl;
-	file << "element vertex " << height*width<< endl;
-	file << "property float32 x" << endl;
-	file << "property float32 y" << endl;
-	file << "property float32 z" << endl;
-	file << "property uint8 red " << endl;
-	file << "property uint8 green" << endl;
-	file << "property uint8 blue" << endl;
-	file << "end_header" << endl;
-	for (int i = 0; i < height; i++)
-   {
-		for (int j = 0; j <width; j++)
-	   {
-
-			file <<i<<" "<< j <<" "<<depth.at < float >(i, j)<<" "
-				<<stereo_image.colorimagesmat_[0].at<Vec3f>(i, j)[2]<<" "
-				<< stereo_image.colorimagesmat_[0].at<Vec3f>(i, j)[1]<<" "
-				<< stereo_image.colorimagesmat_[0].at<Vec3f>(i, j)[0]<<endl;
-	   }
-   }
-	file.close();
-
 }
 
 

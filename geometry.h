@@ -1,4 +1,4 @@
-#ifndef GEOMETRY_H
+/*#ifndef GEOMETRY_H
 #define GEOMETRY_H
 
 #include <iostream>
@@ -31,4 +31,4 @@ private:
 //void read_focal_length( string &directory, int& x, int& y);
 //void read_pointdata( string &directory, string& filename, Mat& low_geometry, int fx, int fy);
 
-#endif
+#endif*/
